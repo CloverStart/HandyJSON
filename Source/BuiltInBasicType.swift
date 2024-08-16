@@ -117,7 +117,11 @@ fileprivate let formatter: NumberFormatter = {
     let formatter = NumberFormatter()
     formatter.usesGroupingSeparator = false
     formatter.numberStyle = .decimal
-    formatter.maximumFractionDigits = 16
+    // MARK: 为了解决【大数】转String异常情况
+    formatter.maximumFractionDigits = 10
+    formatter.maximumIntegerDigits = 20
+    // MARK: 为了解决被误转为【ar数字】情况
+    formatter.locale = Locale(identifier: "en_US_POSIX")
     return formatter
 }()
 
